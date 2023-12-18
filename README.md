@@ -1,7 +1,7 @@
 # REST Task API
 
 I will use this project to show all the steps and architectural decisions to develop a robust and scalable solution. As a database, I will use Postgresql running in a Docker container.. You can find more details in this
-[medium blog](https://medium.com/@sandropucp/natural-language-processing-nlp-practice-with-python-07320d47890f).
+[medium blog](https://medium.com/@sandropucp/rest-web-api-with-net-core-e38347bce373).
 
 1. Task creation, editing, and deletion.
 2. Task categorization or prioritization.

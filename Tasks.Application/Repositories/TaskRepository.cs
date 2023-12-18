@@ -18,8 +18,8 @@ public class TaskRepository : ITaskRepository
         using var transaction = connection.BeginTransaction();
 
         var result = await connection.ExecuteAsync(new CommandDefinition("""
-            insert into tasks (id, slug, title, description, dueDate) 
-            values (@Id, @Slug, @Title, @Description, @DueDate)
+            insert into tasks (id, slug, title, description, status, dueDate) 
+            values (@Id, @Slug, @Title, @Description, @Status, @DueDate)
             """, task, cancellationToken: token));
 
         if (result > 0)
@@ -27,7 +27,7 @@ public class TaskRepository : ITaskRepository
             foreach (var tag in task.Tags)
             {
                 await connection.ExecuteAsync(new CommandDefinition("""
-                    insert into tags (taskId, name) 
+                    insert into tags (taskid, name) 
                     values (@TaskId, @Name)
                     """, new { TaskId = task.Id, Name = tag }, cancellationToken: token));
             }
@@ -79,7 +79,7 @@ public class TaskRepository : ITaskRepository
 
         var tags = await connection.QueryAsync<string>(
             new CommandDefinition("""
-            select name from tags where tagid = @id 
+            select name from tags where taskid = @id 
             """, new { id = task.Id }, cancellationToken: token));
 
         foreach (var tag in tags)
@@ -94,7 +94,7 @@ public class TaskRepository : ITaskRepository
     {
         using var connection = await _dbConnectionFactory.CreateConnectionAsync(token);
         var result = await connection.QueryAsync(new CommandDefinition("""
-            select m.*, string_agg(g.name, ',') as genres 
+            select m.*, string_agg(g.name, ',') as tags 
             from tasks m left join tags g on m.id = g.taskid
             group by id 
             """, cancellationToken: token));
@@ -105,7 +105,7 @@ public class TaskRepository : ITaskRepository
             Title = x.title,
             Description = x.description,
             Status = x.status,
-            DueDate = x.date,
+            DueDate = x.duedate,
             Tags = Enumerable.ToList(x.tags.Split(','))
         });
     }
@@ -116,19 +116,19 @@ public class TaskRepository : ITaskRepository
         using var transaction = connection.BeginTransaction();
 
         await connection.ExecuteAsync(new CommandDefinition("""
-            delete from tags where tagid = @id
+            delete from tags where taskid = @id
             """, new { id = task.Id }, cancellationToken: token));
 
         foreach (var tag in task.Tags)
         {
             await connection.ExecuteAsync(new CommandDefinition("""
-                    insert into tags (tagId, name) 
+                    insert into tags (taskId, name) 
                     values (@TaskId, @Name)
                     """, new { TaskId = task.Id, Name = tag }, cancellationToken: token));
         }
 
         var result = await connection.ExecuteAsync(new CommandDefinition("""
-            update tasks set slug = @Slug, title = @Title, description = @Description, date = @Date 
+            update tasks set slug = @Slug, title = @Title, description = @Description, status = @Status, duedate = @DueDate 
             where id = @Id
             """, task, cancellationToken: token));
 

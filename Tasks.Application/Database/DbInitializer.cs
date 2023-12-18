@@ -15,12 +15,14 @@ public class DbInitializer
         using var connection = await _dbConnectionFactory.CreateConnectionAsync();
 
         await connection.ExecuteAsync("""
-            create table if not exists tasks (
+            drop table if exists tasks cascade;
+            create table tasks (
             id UUID primary key,
             slug TEXT not null, 
             title TEXT not null,
             description TEXT not null,
-            dueDate integer not null);
+            status TEXT not null,
+            dueDate timestamp not null);
         """);
 
         await connection.ExecuteAsync("""

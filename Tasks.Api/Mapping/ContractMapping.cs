@@ -23,7 +23,7 @@ public static class ContractMapping
     {
         return new Task
         {
-            Id = Guid.NewGuid(),
+            Id =id,
             Title = request.Title,
             Description = request.Description,
             Status = request.Status,
@@ -39,7 +39,7 @@ public static class ContractMapping
             Id = task.Id,
             Title = task.Title,
             Description = task.Description,
-            //Slug = task.Slug,
+            Slug = task.Slug,
             Status = task.Status,
             DueDate = task.DueDate,
             Tags = task.Tags

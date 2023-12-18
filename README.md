@@ -11,3 +11,15 @@ I will use this project to show all the steps and architectural decisions to dev
 6. Custom Errors
 7. Response with Codes to indicate status
 8. Cancellation Tokens to cancel requests
+
+To run the database, you can use the following command:
+
+```bash
+docker compose up
+```
+
+To stop the database, you can use the following command:
+
+```bash
+docker compose down
+```

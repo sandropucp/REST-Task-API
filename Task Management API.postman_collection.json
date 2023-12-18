@@ -1,0 +1,132 @@
+{
+	"info": {
+		"_postman_id": "d072a2d7-bec4-4b7d-8320-6a8a2d9a06ce",
+		"name": "Task Management API",
+		"description": "Examples for Task Management API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "68478"
+	},
+	"item": [
+		{
+			"name": "Create a Task",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"Title\": \"Complete Project\",\n  \"Description\": \"Finish the project by the end of the week\",\n  \"Status\": \"In Progress\",\n  \"DueDate\": \"2023-12-18\",\n  \"Tags\": [\"Tag1\"]\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7129/api/tasks",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7129",
+					"path": [
+						"api",
+						"tasks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Tasks",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7129/api/tasks",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7129",
+					"path": [
+						"api",
+						"tasks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Task by ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7129/api/tasks/1",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7129",
+					"path": [
+						"api",
+						"tasks",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Task",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"Title\": \"Complete Project\",\n  \"Description\": \"Finish the project by the end of the week\",\n  \"Status\": \"Completed\",\n  \"DueDate\": \"2023-12-18\",\n  \"Tags\": [\"Tag1\", \"Tag2\"]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7129/api/tasks/7316226b-4d59-4345-9bd2-24c23930e1fa",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7129",
+					"path": [
+						"api",
+						"tasks",
+						"7316226b-4d59-4345-9bd2-24c23930e1fa"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Task",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7129/api/tasks/1",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7129",
+					"path": [
+						"api",
+						"tasks",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

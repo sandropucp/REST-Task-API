@@ -26,10 +26,8 @@ public class TaskValidator : AbstractValidator<Task>
         RuleFor(x => x.Status)
             .NotEmpty();
 
-
         RuleFor(x => x.DueDate)
             .NotEmpty();
-
 
         RuleFor(x => x.Slug)
             .MustAsync(ValidateSlug)
